@@ -1,0 +1,53 @@
+<view class="container">
+  <swiper class="swiper-container" vertical="true" indicator-dots="{{false}}" autoplay="{{false}}" circular="{{false}}" duration="300" previous-margin="0px" next-margin="0px" display-multiple-items="1" skip-hidden-item-layout="false" easing-function="easeInOutCubic" bindchange="onSwiperChange">
+    <!-- 文本部分 -->
+    <swiper-item class="swiper-item">
+      <view class="section">
+        <block wx:for="{{hotspots}}" wx:key="*this" wx:for-item="item" wx:for-index="index">
+          <view class="hotspot-item" bindtap="onHotspotTap" data-url="{{item.url}}">{{index + 1}}. {{item.title}}</view>
+        </block>
+        <text class="description" wx:if="{{textContent === '加载失败，请稍后重试。'}}" bindtap="onTapRefresh">{{textContent}}</text>
+      </view>
+    </swiper-item>
+    
+    <!-- 图片部分 -->
+    <block wx:for="{{imageUrls}}" wx:key="*this">
+      <swiper-item class="swiper-item">
+        <template is="imageTemplate" data="{{src: item}}"/>
+      </swiper-item>
+    </block>
+    
+    <!-- 视频部分 -->
+    <block wx:for="{{videoUrls}}" wx:key="*this">
+      <swiper-item class="swiper-item">
+        <template is="videoTemplate" data="{{src: item, id: 'video' + index}}"/>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <!-- 全屏图片覆盖层 -->
+  <view wx:if="{{isFullScreen}}" class="fullscreen-container" bindtap="closeFullScreen">
+    <image class="fullscreen-image" src="{{fullScreenImageUrl}}" mode="aspectFit"></image>
+  </view>
+</view>
+
+<!-- 定义文本模板 -->
+<template name="textTemplate">
+  <view class="section">
+    <text class="description">{{content}}</text>
+  </view>
+</template>
+
+<!-- 定义图片模板 -->
+<template name="imageTemplate">
+  <view class="section">
+    <image class="sample-image" src="{{src}}" mode="aspectFit" bindtap="previewImage" bind:longpress="onLongPressImage" data-src="{{src}}"></image>
+  </view>
+</template>
+
+<!-- 定义视频模板 -->
+<template name="videoTemplate">
+  <view class="section">
+    <video id="{{id}}" class="sample-video" src="{{src}}" controls show-fullscreen-btn="false" bind:longpress="onLongPressVideo" show-play-btn="false" show-center-play-btn="false" bindtap="playVideoById"></video>
+  </view>
+</template>
