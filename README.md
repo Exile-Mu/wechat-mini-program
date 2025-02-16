@@ -1,26 +1,26 @@
-# WeChat Mini Program - 清木资讯
-
 ## 项目简介
 
 这是一个微信小程序项目，展示了文本、图片和视频内容。用户可以通过滑动浏览不同的内容，并点击图片进行全屏预览。
 
-## 目录结构
+## 项目结构
 
 ```
 wechat-mini-program/
 ├── app.js
 ├── app.json
 ├── app.wxss
-├── project.config.json
-├── project.private.config.json
 ├── pages/
-│   └── index/
-│       ├── index.js
-│       ├── index.json
-│       ├── index.wxml
-│       └── index.wxss
-└── assets/
-    ├── OIP-C.jpg
+│   ├── index/
+│   │   ├── index.js
+│   │   ├── index.json
+│   │   ├── index.wxml
+│   │   └── index.wxss
+│   └── webview/
+│       ├── webview.js
+│       ├── webview.json
+│       ├── webview.wxml
+│       └── webview.wxss
+└── README.md
 ```
 
 ## 功能
